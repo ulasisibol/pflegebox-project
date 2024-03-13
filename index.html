@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Scripts -->
+    <script src="/js/app.js" defer></script>
+    <!-- Styles -->
+    <link href="/css/app.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+
+</head>
+<style>
+</style>
+
+<body>
+
+    <div class="header py-5">
+        <!--<img class="logo" src="https://formular.curama.de/assets/img/logo_curama.png" />-->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-7">
+                    <div class="menu-bars">
+                        <div class="bar-content  active ">
+                            <p>1. Box auswählen</p>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="bar-content ">
+                            <p>2. Persönliche Daten</p>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="bar-content ">
+                            <p>3. Unterschrift</p>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center" style="font-size: x-large;">Wählen Sie Ihre Pflegebox</h1>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-10">
+                <div id="boxCarouselIndicators" class="carousel slide" data-interval="false" data-ride="">
+                    <ol class="carousel-indicators">
+                        <li data-target="#boxCarouselIndicators" data-slide-to="0" class="active">
+                            <img class="box-indicator" src="assets/img/box.png" />
+                            <img class="box-indicator-active" src="assets/img/boxactive.png" />
+                            <p>Standard</p>
+                        </li>
+                        <li data-target="#boxCarouselIndicators" data-slide-to="1" class="">
+                            <img class="box-indicator" src="assets/img/box.png" />
+                            <img class="box-indicator-active" src="assets/img/boxactive.png" />
+                            <p>Desinfektion</p>
+                        </li>
+                        <li data-target="#boxCarouselIndicators" data-slide-to="2" class="">
+                            <img class="box-indicator" src="assets/img/box.png" />
+                            <img class="box-indicator-active" src="assets/img/boxactive.png" />
+                            <p>Inkontinenz</p>
+                        </li>
+                        <li data-target="#boxCarouselIndicators" data-slide-to="3" class="">
+                            <img class="box-indicator" src="assets/img/box.png" />
+                            <img class="box-indicator-active" src="assets/img/boxactive.png" />
+                            <p>Individuell</p>
+                        </li>
+
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="container">
+                                <div class="">
+                                    <div class="col-md-12 p-2">
+                                        <div class="center-img">
+                                            <img class="box-photo" src="assets/img/boxes/standard.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 p-3 text-center">
+                                        <div>
+                                            <h6>NITRIL HANDSCHUHE GRÖßE:</h6>
+                                            <input name="nitril-grobe" type="radio" value="1"> <span
+                                                class="mx-1">S</span>
+                                            <input name="nitril-grobe" type="radio" value="2"> <span
+                                                class="mx-1">M</span>
+                                            <input name="nitril-grobe" type="radio" value="3"> <span
+                                                class="mx-1">L</span>
+                                            <input name="nitril-grobe" type="radio" value="4"> <span
+                                                class="mx-1">XL</span>
+                                        </div>
+                                        <button id="standard" onclick="window.location.href='form-page-1.html'"
+                                            style="display: inline !important;" class="submit-button"
+                                            value="standard">Auswählen</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="container">
+                                <div class="">
+                                    <div class="col-md-12 p-2 box-text">
+                                        <div class="center-img">
+                                            <img class="box-photo" src="assets/img/boxes/desinfektion.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 p-3 text-center">
+                                        <button id="desinfektion" onclick="window.location.href='form-page-1.html'"
+                                            style="display: inline !important;" class="submit-button"
+                                            value="desinfektion">Auswählen</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="carousel-item">
+                            <div class="container">
+                                <div class="">
+                                    <div class="col-md-12 p-2">
+                                        <div class="center-img">
+                                            <img class="box-photo" src="assets/img/boxes/inkontinenz.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 p-3 text-center">
+                                        <button id="inkontinenz" onclick="window.location.href='form-page-1.html'"
+                                            style="display: inline !important;" class="submit-button"
+                                            value="ınkontinenz">Auswählen</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item ">
+                            <div class="container">
+                                <div class="">
+                                    <div class="col-md-12 p-2">
+                                        <div class="center-img">
+                                            <img class="box-photo" src="assets/img/boxes/individuelle.jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 p-3 text-center">
+                                        <button id="individuell" onclick="window.location.href='individuelle.html'"
+                                            style="display: inline !important;" class="submit-button"
+                                            value="individuell">Auswählen</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <a class="carousel-control-prev" href="#boxCarouselIndicators" role="button" data-slide="prev">
+                        <img class="" src="assets/img/arrow_left.png" />
+                    </a>
+                    <a class="carousel-control-next" href="#boxCarouselIndicators" role="button" data-slide="next">
+                        <img class="" src="assets/img/arrow_right.png" />
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelectorAll('input[type="radio"]').forEach(function (radio) {
+            // İlk tıklama sırasında radio butonunun mevcut durumunu saklamak için bir özellik ekleyin
+            radio.addEventListener('mousedown', function () {
+                this.dataset.wasChecked = this.checked;
+            });
+
+            radio.addEventListener('click', function () {
+                // Eğer radio butonu zaten seçiliyse, seçimini kaldır ve LocalStorage kaydını sil
+                if (this.dataset.wasChecked === 'true') {
+                    this.checked = false;
+                    localStorage.removeItem(this.name);
+                } else {
+                    // Eğer radio butonu daha önce seçili değilse, normal davranışı izle ve LocalStorage'a kaydet
+                    localStorage.setItem(this.name, this.value);
+                }
+            });
+        });
+        // Tüm radio butonlarını seç
+        var radios = document.querySelectorAll('input[type="radio"]');
+
+        // Her bir radio butonu için bir olay dinleyicisi ekleyin
+        radios.forEach(function (radio) {
+            radio.addEventListener('change', function () {
+                // Seçili radio butonunun name ve value değerlerini al
+                var name = this.name;
+                var value = this.value;
+
+                // localStorage'a "name=value" formatında kaydet
+                localStorage.setItem(name, value);
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            // Buton id'leri ve kaydedilecek özel değerler
+            var buttons = {
+                'standard': { boxType: 'Standard Box', gratis: 'Feuchte Waschhandschuhe mit Schutzcreme', selectedProducts: 'Nitril Handschuhe, Mundschutz, Flächendesinfektion (1.000 ml, Spray), Handdesinfektionsgel (500 ml, Pumpspender)' },
+                'desinfektion': { boxType: 'Desinfektion Box', gratis: 'Inkontinenz Reinigungs-/Pflegetücher', selectedProducts: '50 Bettschutzunterlagen, Flächendesinfektion (1.000 ml, Spray), Handdesinfektionsgel (500 ml, Pumpspender)' },
+                'inkontinenz': { boxType: 'Inkontinenz Box', gratis: 'Shampoo Haube', selectedProducts: '2x Flächendesinfektion (2x 1.000 ml, Spray), 2x Handdesinfektionsgel (2x 500 ml, Pumpspender)' },
+                'individuell': { boxType: 'Individuell Box' }
+            };
+
+            // Her bir buton için bir event listener ekleyin
+            Object.keys(buttons).forEach(function (id) {
+                var button = document.getElementById(id);
+                button.addEventListener('click', function () {
+                    // Tanımlı özel değerleri localStorage'a kaydet
+                    var boxInfo = buttons[id]; // id'ye göre özel değerleri al
+                    localStorage.setItem('selected', boxInfo.boxType);
+                    localStorage.setItem('gratis', boxInfo.gratis);
+                    // selectedProducts dizisini JSON string'ine çevirerek kaydediyoruz
+                    localStorage.setItem('selectedProducts', JSON.stringify(boxInfo.selectedProducts));
+                });
+            });
+        });
+
+    </script>
+
+
+</body>
+
+</html>

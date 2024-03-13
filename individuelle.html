@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Scripts -->
+    <script src="/js/app.js" defer></script>
+    <!-- Styles -->
+    <link href="/css/app.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+
+<body>
+
+    <div class="header py-5">
+        <!--<img class="logo" src="/assets/img/logo_curama.png" />-->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-7">
+                    <div class="menu-bars">
+                        <div class="bar-content  active ">
+                            <p>1. Box auswählen</p>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="bar-content ">
+                            <p>2. Persönliche Daten</p>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="bar-content ">
+                            <p>3. Unterschrift</p>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container pb-5">
+        <div id="error-message" class="row mb-3" style="display: none;">
+            <div class="col-md-12">
+                <p class="text-center"
+                    style="padding: 10px; border-radius: 20px; color: white; background-color: rgba(255, 0, 0, 0.866);">
+                    Bitte
+                    überprüfen Sie Ihre Eingabe,
+                    leider haben Sie noch
+                    nicht alle Pflichtfelder ausgefüllt. Herzlichen Dank, Ihr Team von Pflegedienstbox.</p>
+            </div>
+        </div>
+        <div class="row pb-5">
+            <div class="col-md-12">
+                <h1 class="text-center" style="font-size: x-large;">Stellen Sie sich Ihre Box zusammen:</h1>
+            </div>
+        </div>
+        <!-- <div class="row justify-content-start mb-3">
+            <div class="col-md-7">
+                <div class="progress-bar"></div>
+            </div>
+        </div> -->
+
+        <div class="row justify-content-md-center">
+            <div class="col-md-7">
+                <div class="white-box py-5">
+                    <div class="box-item clearfix px-3">
+                        <div class="box-item-img">
+                            <img class="image444" src="/assets/img/single/Bettschutzunterlagen.jpg" />
+                        </div>
+                        <div class="box-item-text">
+                            <h3>Bettschutzunterlagen</h3>
+                            <p>25 Stück</p>
+                        </div>
+                        <div class="box-select clearfix">
+                            <span class="count-left inactive">-</span>
+                            <div class="box-count" data-count="0" data-amount="25" data-price="3">0</div>
+                            <span class="count-right">+</span>
+                        </div>
+                    </div>
+                    <div class="box-divider my-3"></div>
+                    <div class="box-item clearfix px-3">
+                        <div class="box-item-img">
+                            <img class="" src="/assets/img/single/Besucherschürzen.jpg" />
+                        </div>
+                        <div class="box-item-text">
+                            <h3>Besucherschürzen</h3>
+                            <p>100 Stück</p>
+                        </div>
+                        <div class="box-select clearfix">
+                            <span class="count-left inactive">-</span>
+                            <div class="box-count" data-count="0" data-amount="1" data-price="3">0</div>
+                            <span class="count-right">+</span>
+                        </div>
+                    </div>
+                    <div class="box-divider my-3"></div>
+                    <div class="box-item clearfix px-3">
+                        <div class="box-item-img">
+                            <img class="" src="/assets/img/single/Fingerlinge.jpg" />
+                        </div>
+                        <div class="box-item-text">
+                            <h3>Fingerlinge</h3>
+                            <p>100 Stück</p>
+                        </div>
+                        <div class="box-select clearfix">
+                            <span onclick="downdateFingerline()" class="count-left inactive">-</span>
+                            <div class="box-count" data-count="0" data-amount="1" data-price="1">0</div>
+                            <span onclick="updateFingerline()" class="count-right">+</span>
+                        </div>
+                    </div>
+                    <div class="box-divider my-3"></div>
+                    <div class="box-item clearfix px-3">
+                        <div class="box-item-img">
+                            <img class="" src="/assets/img/single/Handschuhe.jpg" />
+                        </div>
+                        <div class="box-item-text">
+                            <h3>Nitril Handschuhe</h3>
+                            <p>100 Stück</p>
+                        </div>
+                        <div class="box-select clearfix">
+                            <span onclick="downdateNitril()" class="count-left inactive">-</span>
+                            <div class="box-count" data-count="0" data-amount="1" data-price="2">0</div>
+                            <span onclick="updateNitril()" class="count-right">+</span>
+                        </div>
+                    </div>
+                    <div class="box-divider my-3"></div>
+                    <div class="box-item clearfix px-3">
+                        <div class="box-item-img">
+                            <img class="" src="/assets/img/single/Mundschutz.jpg" />
+                        </div>
+                        <div class="box-item-text">
+                            <h3>Mundschutz</h3>
+                            <p>50 Stück</p>
+                        </div>
+                        <div class="box-select clearfix">
+                            <span class="count-left inactive">-</span>
+                            <div class="box-count" data-count="0" data-amount="10" data-price="2">0</div>
+                            <span class="count-right">+</span>
+                        </div>
+                    </div>
+                    <div class="box-divider my-3"></div>
+                    <div class="box-item clearfix px-3">
+                        <div class="box-item-img">
+                            <img class="" src="/assets/img/single/Flachendesinfektion.jpg" />
+                        </div>
+                        <div class="box-item-text">
+                            <h3>Flächendesinfektion</h3>
+                            <p>1.000 ml, Spray</p>
+                        </div>
+                        <div class="box-select clearfix">
+                            <span class="count-left inactive">-</span>
+                            <div class="box-count" data-count="0" data-amount="1" data-price="3">0</div>
+                            <span class="count-right">+</span>
+                        </div>
+                    </div>
+                    <div class="box-divider my-3"></div>
+                    <div class="box-item clearfix px-3">
+                        <div class="box-item-img">
+                            <!--<div class="imgspacer"></div>-->
+                            <img class="" src="/assets/img/single/Handesinfektionsgel.jpg" />
+                        </div>
+                        <div class="box-item-text">
+                            <h3>Handesinfektionsgel</h3>
+                            <p>500 ml, inkl. Pumpspender</p>
+                        </div>
+                        <div class="box-select clearfix">
+                            <span class="count-left inactive">-</span>
+                            <div class="box-count" data-count="0" data-amount="24" data-price="2">0</div>
+                            <span class="count-right">+</span>
+                        </div>
+                    </div>
+
+                    <div class="box-divider my-3"></div>
+                </div>
+                <input type="hidden" class="boxsum" data-sum="0">
+            </div>
+            <div class="col-md-5">
+                <div class="white-box py-4 px-5 cart-section">
+                    <img class="all-products-img" style="width: 100%;" src="/assets/img/box_alle2.png">
+                    <div style="display: flex; justify-content: center;">
+                        <h2 id="totalAmount" style="font-size: 1.5rem !important;"></h2>
+                        <h2 style="font-size: 1.5rem !important;">/10 punkte</h2>
+                    </div>
+                    <div class="w3-border" style="border-radius: 50px;">
+                        <div class="w3-grey"
+                            style="border-radius: 50px; max-width: 100%; background-color: hsl(188, 53%, 60%) !important; height:24px;width:20%">
+                        </div>
+                    </div>
+                    <h2 class="mb-4 second-headline" style="font-size: x-large;">Ihre individuelle Box</h2>
+
+                    <div id="box-items-selected" class="box-items-selected" style="font-size: 16px; "></div>
+                    <br>
+                    <div>
+                        <div id="fingerline-show" style="display: none;">
+                            <h6>FINGERLINGE GRÖßE:</h6>
+                            <input name="fingerline-grobe" type="radio" value="1"> <span class="mx-1">S</span>
+                            <input name="fingerline-grobe" type="radio" value="2"> <span class="mx-1">M</span>
+                            <input name="fingerline-grobe" type="radio" value="3"> <span class="mx-1">L</span>
+                            <input name="fingerline-grobe" type="radio" value="4"> <span class="mx-1">XL</span>
+                        </div>
+                        <div id="nitril-show" style="display: none;">
+                            <h6>NITRIL HANDSCHUHE GRÖßE:</h6>
+                            <input name="nitril-grobe" type="radio" value="1"> <span class="mx-1">S</span>
+                            <input name="nitril-grobe" type="radio" value="2"> <span class="mx-1">M</span>
+                            <input name="nitril-grobe" type="radio" value="3"> <span class="mx-1">L</span>
+                            <input name="nitril-grobe" type="radio" value="4"> <span class="mx-1">XL</span>
+                        </div>
+
+                    </div>
+                    <!--<p class="agb-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>-->
+                    <a href="index.html" class="submit-button float-left mr-3 back-button back">Zurück</a>
+
+                    <button id="individuellProducts" onclick="myFunction(); window.location.href='gratis.html'"
+                        style="display: inline !important;" class="submit-button">Weiter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Tüm radio butonlarını seç
+        var radios = document.querySelectorAll('input[type="radio"]');
+
+        // Her bir radio butonu için bir olay dinleyicisi ekleyin
+        radios.forEach(function (radio) {
+            radio.addEventListener('change', function () {
+                // Seçili radio butonunun name ve value değerlerini al
+                var name = this.name;
+                var value = this.value;
+
+                // localStorage'a "name=value" formatında kaydet
+                localStorage.setItem(name, value);
+            });
+        });
+
+
+        function updateFingerline() {
+            var Fingerlinge = localStorage.getItem("Fingerlinge");
+            if (Fingerlinge >= 0) {
+                document.getElementById('fingerline-show').style.display = 'block';
+            }
+        }
+
+        function downdateFingerline() {
+            var Fingerlinge = localStorage.getItem("Fingerlinge");
+            if (Fingerlinge <= 1) {
+                document.getElementById('fingerline-show').style.display = 'none';
+            }
+        }
+
+        function updateNitril() {
+            var nitril = localStorage.getItem("Nitril Handschuhe");
+            if (nitril >= 0) {
+                document.getElementById('nitril-show').style.display = 'block';
+            }
+        }
+
+        function downdateNitril() {
+            var nitril = localStorage.getItem("Nitril Handschuhe");
+            if (nitril <= 1) {
+                document.getElementById('nitril-show').style.display = 'none';
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>

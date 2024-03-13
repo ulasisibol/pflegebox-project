@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="/js/app.js" defer></script>
+    <link href="/css/app.css" rel="stylesheet">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+
+</head>
+
+
+<body>
+
+    <div class="header py-5">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-7">
+                    <div class="menu-bars">
+                        <div class="bar-content ">
+                            <p>1. Box auswählen</p>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="bar-content ">
+                            <p>2. Persönliche Daten</p>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="bar-content  active ">
+                            <p>3. Unterschrift</p>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container pb-5">
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h1 class="text-center" style="font-size: x-large;">Bestellübersicht</h1>
+            </div>
+        </div>
+
+
+        <div class="row justify-content-md-center">
+            <div class="col-md-4">
+                <div class="box-border bg-white py-5">
+                    <h4 class="mb-4">Antragsteller</h4>
+                    <p id="personInfo">
+                        <strong></strong> <strong></strong>
+                        <br>
+                        <strong style="font-weight: 100;"></strong>
+                        <br>
+                        <strong style="font-weight: 100;"></strong>
+                        <br>
+                        <strong style="font-weight: 100;"></strong>
+                        <br>
+                        <strong style="font-weight: 100;"></strong>
+                        <br>
+                        <strong style="font-weight: 100;"></strong>
+                    </p>
+                </div>
+            </div>
+
+
+
+
+            <div class="col-md-4">
+                <div class="box-border bg-white py-5">
+                    <h4 class="mb-4 text-center">Pflegebedürftige Person</h4>
+                    <p id="versicherung">
+                        <strong></strong>
+                        <strong></strong>
+                        <br>
+                        <strong style="font-weight: 100;"></strong>
+                        <br>
+                        <strong>Geburtsdatum: </strong><strong style="font-weight: 100;"></strong>
+                        <br>
+                        <strong>Versicherten-Nr: </strong><strong style="font-weight: 100;"></strong>
+                    </p>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4">
+                <div id="siparis" class="box-border bg-white py-5">
+                    <h4 class="mb-4">Ihre Bestellung</h4>
+                    <strong></strong>
+
+                    <strong></strong><br>
+                    <strong style="font-weight: 100;">
+                        Keine Auswahl
+                    </strong>
+                    <br>
+
+                    <strong>Gratis</strong><br>
+
+                    <strong style="font-weight: 100;"></strong>
+                    <br><br>
+
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div id="imzaCanvas" style="display: none;">
+            <canvas style="border: 0.7px solid black; background-color: rgb(255, 255, 255);" id="signatureCanvas"
+                width="400" height="200"></canvas>
+            <div style="margin-left: 20px;">
+                <button class="submit-button" style="width: 150px;" id="saveButton"
+                    onclick="generatePDF()">Senden</button>
+                <button style="width: 150px;" class="submit-button" id="clearButton">Löschen</button>
+            </div>
+        </div>
+
+
+
+
+        <div class="row justify-content-md-center mt-4">
+            <div class="col-md-9">
+                <form method="POST" target="_self" action="" accept-charset="UTF-8">
+                    <input name="name" type="hidden" value="">
+                    <input name="prename" type="hidden" value="">
+                    <input name="gender" type="hidden" value="">
+                    <input name="email" type="hidden" value="">
+                    <input name="phone" type="hidden" value="">
+                    <input name="birthdate" type="hidden" value="">
+                    <input name="insurance" type="hidden" value="">
+                    <input name="insuranceselect" type="hidden" value="">
+                    <input name="insurancenumber" type="hidden" value="">
+                    <input name="care" type="hidden" value="">
+                    <input name="carelevel" type="hidden" value="">
+                    <input name="suffix" type="hidden" value="">
+                    <input name="street" type="hidden" value="">
+                    <input name="city" type="hidden" value="">
+                    <input name="zip" type="hidden" value="">
+                    <input name="selected" type="hidden" value="">
+                    <input name="selectedProducts" type="hidden" value="">
+                    <input name="gratis" type="hidden" value="">
+                    <div class="clearfix">
+                        <a href="form-page-6.html" class="submit-button float-left mr-3 back-button back">Zurück</a>
+                        <button class="submit-button float-left mx-3" type="button" onclick="imza()">Antrag online
+                            stellen</button>
+                        <button class="submit-button float-left mx-3" type="button"
+                            onclick="generatePDFUnsigned()">Antrag
+                            Herunterladen</button>
+                        <button class="submit-button float-left mx-3" type="button"
+                            onclick="window.location.href='https://pflegedienstbox.de/'">Startseise</button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+    <script>
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var canvas = document.getElementById('signatureCanvas');
+            var ctx = canvas.getContext('2d');
+
+            document.getElementById('clearButton').addEventListener('click', function () {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            });
+        });
+        var now = new Date();
+
+        // Tarih ve saati YYYY-MM-DD HH:MM:SS formatında bir string'e dönüştür
+        var dateString = now.getFullYear() + "-" +
+            ("0" + (now.getMonth() + 1)).slice(-2) + "-" +
+            ("0" + now.getDate()).slice(-2) + " " +
+            ("0" + now.getHours()).slice(-2) + ":" +
+            ("0" + now.getMinutes()).slice(-2) + ":" +
+            ("0" + now.getSeconds()).slice(-2);
+
+        localStorage.setItem('currentDate', dateString);
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const canvas = document.querySelector('#signatureCanvas');
+            const signaturePad = new SignaturePad(canvas);
+            const saveButton = document.querySelector('#saveButton');
+
+            saveButton.addEventListener('click', function () {
+                const signatureImage = signaturePad.toDataURL();
+                const clearButton = document.querySelector('#clearButton');
+                clearButton.addEventListener('click', function () {
+                    localStorage.setItem('signatureImage', signatureImage);
+
+                    signaturePad.clear();
+                });
+
+                if (signaturePad.isEmpty()) {
+                    alert('Please provide a signature.');
+                    return; // If the signature pad is empty, stop execution.
+                }
+
+                localStorage.setItem('signatureImage', signatureImage);
+
+                signaturePad.clear();
+            });
+
+            const savedSignatureImage = localStorage.getItem('signatureImage');
+            if (savedSignatureImage) {
+                const img = new Image();
+                img.src = savedSignatureImage;
+                img.onload = function () {
+                    canvas.getContext('2d').drawImage(img, 0, 0);
+                }
+            }
+        });
+        function imza() {
+            var signatureCanvas = document.querySelector('#imzaCanvas');
+            if (signatureCanvas.style.display === 'none') {
+                signatureCanvas.style.display = 'flex';
+            } else {
+                signatureCanvas.style.display = 'none';
+            }
+        }
+        function fillFormAndSubmit() {
+            var name = localStorage.getItem('name-1') || '';
+            var prename = localStorage.getItem('prename-1') || '';
+            var email = localStorage.getItem('email-1') || '';
+            var phone = localStorage.getItem('phone-1') || '';
+            var birthdate = localStorage.getItem('birthdate-1') || '';
+            var insurance = localStorage.getItem('insurance') || '';
+            var insuranceselect = localStorage.getItem('insuranceselect') || '';
+            var insurancenumber = localStorage.getItem('insurancenumber') || '';
+            var care = localStorage.getItem('care') || '';
+            var carelevel = localStorage.getItem('carelevel') || '';
+            var suffix = localStorage.getItem('suffix') || '';
+            var street = localStorage.getItem('street') || '';
+            var city = localStorage.getItem('city') || '';
+            var zip = localStorage.getItem('zip') || '';
+            var selected = localStorage.getItem('selected') || '';
+            var selectedProducts = localStorage.getItem('selectedProducts') || '';
+            var gratis = localStorage.getItem('gratis') || '';
+            var date = localStorage.getItem('currentDate') || '';
+
+            document.querySelector('input[name="name"]').value = name;
+            document.querySelector('input[name="prename"]').value = prename;
+            document.querySelector('input[name="email"]').value = email;
+            document.querySelector('input[name="phone"]').value = phone;
+            document.querySelector('input[name="birthdate"]').value = birthdate;
+            document.querySelector('input[name="insurance"]').value = insurance;
+            document.querySelector('input[name="insuranceselect"]').value = insuranceselect;
+            document.querySelector('input[name="insurancenumber"]').value = insurancenumber;
+            document.querySelector('input[name="care"]').value = care;
+            document.querySelector('input[name="carelevel"]').value = carelevel;
+            document.querySelector('input[name="suffix"]').value = suffix;
+            document.querySelector('input[name="street"]').value = street;
+            document.querySelector('input[name="city"]').value = city;
+            document.querySelector('input[name="zip"]').value = zip;
+            document.querySelector('input[name="selected"]').value = selected;
+            document.querySelector('input[name="selectedProducts"]').value = selectedProducts;
+            document.querySelector('input[name="gratis"]').value = gratis;
+
+        }
+
+
+
+        //personInfo
+        document.getElementById("personInfo").getElementsByTagName("strong")[0].innerText = localStorage.getItem("prename-1");
+        document.getElementById("personInfo").getElementsByTagName("strong")[1].innerText = localStorage.getItem("name-1");
+        document.getElementById("personInfo").getElementsByTagName("strong")[2].innerText = localStorage.getItem("plz-city-1");
+        document.getElementById("personInfo").getElementsByTagName("strong")[3].innerText = localStorage.getItem("phone-1");
+        document.getElementById("personInfo").getElementsByTagName("strong")[4].innerText = localStorage.getItem("email-1");
+        document.getElementById("personInfo").getElementsByTagName("strong")[6].innerText =
+            localStorage.getItem("birthdate-1");
+
+        //versicherung
+        document.getElementById("versicherung").getElementsByTagName("strong")[0].innerText = localStorage.getItem("prename-4");
+        document.getElementById("versicherung").getElementsByTagName("strong")[1].innerText =
+            localStorage.getItem("name-4");
+        document.getElementById("versicherung").getElementsByTagName("strong")[2].innerText =
+            localStorage.getItem("plz-city-4");
+        document.getElementById("versicherung").getElementsByTagName("strong")[4].innerText =
+            localStorage.getItem("birthday-4");
+        document.getElementById("versicherung").getElementsByTagName("strong")[6].innerText =
+            localStorage.getItem("versicherten-4");
+
+        //siparis
+        document.getElementById("siparis").getElementsByTagName("strong")[1].innerText = localStorage.getItem("selected");
+        document.getElementById("siparis").getElementsByTagName("strong")[2].innerText =
+            localStorage.getItem("selectedProducts");
+        document.getElementById("siparis").getElementsByTagName("strong")[4].innerText = localStorage.getItem("gratis");
+
+
+        function checkLocalStorageAndRemoveInputs() {
+            // localStorage'daki "selected" anahtarının değerini kontrol et
+            var selectedValue = localStorage.getItem('selected');
+
+            // Eğer "selected" değeri "Individuell" ise
+            if (selectedValue === 'Pflegebox INDIVIDUELL') {
+                // Kapanacak sınıfına sahip input öğelerini seç
+                var inputs = document.querySelectorAll('#kapanacak, #kapanacak2');
+
+                // Seçilen input öğelerini kaldır
+                inputs.forEach(function (input) {
+                    input.style.setProperty('display', 'none', 'important'); // Görüntüden kaldır
+                });
+            }
+        }
+
+        // Sayfa yüklendiğinde fonksiyonu çağır
+        document.addEventListener('DOMContentLoaded', function () {
+            checkLocalStorageAndRemoveInputs();
+        });
+
+        //pdf oluşturma ve indirme
+        var selected = localStorage.getItem("selected") || "";
+        var gratis = localStorage.getItem("gratis") || "";
+        var gender_1 = localStorage.getItem('gender-1') || "";
+        var name_1 = localStorage.getItem("name-1") || "";
+        var prename_1 = localStorage.getItem("prename-1") || "";
+        var street_1 = localStorage.getItem("street-1") || "";
+        var plz_city_1 = localStorage.getItem("plz-city-1") || "";
+        var phone_1 = localStorage.getItem("phone-1") || "";
+        var email_1 = localStorage.getItem("email-1") || "";
+        var versicherte_1 = localStorage.getItem("versicherte-1") || "";
+        var pflegegrad_1 = localStorage.getItem("pflegegrad-1") || "";
+        var versicherte_bezieht_1 = localStorage.getItem("versicherte-bezieht-1") || "";
+        var gesetzlichen_1 = localStorage.getItem("gesetzlichen-1") || "";
+        var gender_2 = localStorage.getItem("gender-2") || "";
+        var name_2 = localStorage.getItem("name-2") || "";
+        var prename_2 = localStorage.getItem("prename-2") || "";
+        var street_2 = localStorage.getItem("street-2") || "";
+        var plz_city_2 = localStorage.getItem("plz-city-2") || "";
+        var phone_2 = localStorage.getItem("phone-2") || "";
+        var email_2 = localStorage.getItem("email-2") || "";
+        var pflegeperson_2 = localStorage.getItem("pflegeperson-2") || "";
+        var bevollmachtigt_2 = localStorage.getItem("bevollmachtigt-2") || "";
+        var lieferadresse_3 = localStorage.getItem("lieferadresse-3") || "";
+        var name_3 = localStorage.getItem("name-3") || "";
+        var street_3 = localStorage.getItem("street-3") || "";
+        var plz_city_3 = localStorage.getItem("plz-city-3") || "";
+        var phone_3 = localStorage.getItem("phone-3") || "";
+        var email_3 = localStorage.getItem("email-3") || "";
+        var secenek_4 = localStorage.getItem("secenek-4") || "";
+        var onay_4 = localStorage.getItem("onay-4") || "";
+        var onay_5 = localStorage.getItem("onay-5") || "";
+        var gender_4 = localStorage.getItem("gender-4") || "";
+        var name_4 = localStorage.getItem("name-4") || "";
+        var prename_4 = localStorage.getItem("prename-4") || "";
+        var street_4 = localStorage.getItem("street-4") || "";
+        var plz_city_4 = localStorage.getItem("plz-city-4") || "";
+        var birthday_4 = localStorage.getItem("birthday-4") || "";
+        var pflegekasse_4 = localStorage.getItem("pflegekasse-4") || "";
+        var versicherten_4 = localStorage.getItem("versicherten-4") || "";
+        var product_5_1 = localStorage.getItem("product-5.1") || "";
+        var product_5_2 = localStorage.getItem("product-5.2") || "";
+        var product_5_3 = localStorage.getItem("product-5.3") || "";
+        var product_5_4 = localStorage.getItem("product-5.4") || "";
+        var product_5_5 = localStorage.getItem("product-5.5") || "";
+        var product_5_6 = localStorage.getItem("product-5.6") || "";
+        var product_5_7 = localStorage.getItem("product-5.7") || "";
+        var product_5_8 = localStorage.getItem("product-5.8") || "";
+        var fingerline_grobe = localStorage.getItem("fingerline-grobe") || "";
+        var nitril_grobe = localStorage.getItem("nitril-grobe") || "";
+        var wechselerklarung = localStorage.getItem("wechselerklarung") || "";
+        var date = localStorage.getItem('currentDate') || '';
+
+        function generatePDFUnsigned() {
+            console.log(name_1);
+
+            const { jsPDF } = window.jspdf;
+
+            // PDF nesnesini oluştur
+            var pdf = new jsPDF();
+
+            // Resim 1'in yolu
+            var img1 = '/0001.jpg';
+            // Resim 2'nin yolu
+            var img2 = '0001.1.jpg';
+            var fixedWidth = 180;
+
+            // Resim 1'i yükleyip ölçülerini al
+            var img1Element = new Image();
+            img1Element.onload = function () {
+
+                var imgHeight = this.height * fixedWidth / this.width;
+                var imgWidth = fixedWidth;
+                var marginLeft = (pdf.internal.pageSize.getWidth() - imgWidth) / 2;
+                var marginTop = 10;
+                // Resim 1'i tam sığdıracak şekilde ekle
+                pdf.addImage(img1, 'JPEG', marginLeft, marginTop, imgWidth, imgHeight);
+
+
+                pdf.setFontSize(10);
+                if (gender_1 === "H") {
+                    pdf.text("x", 33.5, 44.5);
+
+                } else if (gender_1 === "F") {
+                    pdf.text("x", 33.5, 41.5);
+                }
+
+                pdf.text(name_1, 60, 43);
+                pdf.text(prename_1, 131, 43);
+                pdf.text(street_1, 60, 51);
+                pdf.text(plz_city_1, 131, 51);
+                pdf.text(phone_1, 60, 57);
+                pdf.text(email_1, 131.2, 57);
+                //pfleggeggard
+                if (pflegegrad_1 === "1") {
+                    pdf.text("x", 76.3, 63.5);
+                } else if (pflegegrad_1 === "2") {
+
+                    pdf.text("x", 84.5, 63.5);
+                } else if (pflegegrad_1 === "3") {
+
+                    pdf.text("x", 92.6, 63.5);
+                } else if (pflegegrad_1 === "4") {
+
+                    pdf.text("x", 100.5, 63.5);
+                } else if (pflegegrad_1 === "5") {
+
+                    pdf.text("x", 110, 63.5);
+                }
+                else if (pflegegrad_1 === "Ich habe keinen Pflegegrad") {
+
+                    pdf.text("x", 117.6, 63.5);
+                }
+
+                //versicherte
+                if (versicherte_1 === "gesetzlichpflegeversichert") {
+                    pdf.text("x", 54, 68.5);
+
+                } else if (versicherte_1 === "privatpflegeversichert") {
+                    pdf.text("x", 87, 68.5);
+
+                } else if (versicherte_1 === "beihilfeberechtigt") {
+                    pdf.text("x", 115, 68.5);
+
+                } else if (versicherte_1 === "überOrtsamt/Sozialamtversichert") {
+                    pdf.text("x", 138, 68.5);
+
+                }
+
+
+
+                //2 kısım
+                // Belirli koşullara göre metin ekleyin
+                if (gender_2 === "H") {
+                    pdf.setFontSize(7).text("x", 33.2, 79.2);
+
+                } else if (gender_2 === "F") {
+                    pdf.text("x", 33.2, 82.5);
+                }
+
+
+
+                pdf.setFontSize(10).text(name_2, 60, 82);
+                pdf.text(prename_2, 131, 82);
+
+                pdf.text(street_2, 60, 88);
+                pdf.text(plz_city_2, 131, 88);
+
+                pdf.text(phone_2, 60, 95.2);
+                pdf.text(email_2, 131, 95.2);
+
+
+                if (nitril_grobe === "4") {
+                    pdf.text("X", 114.4, 139);
+                } else if (nitril_grobe === "3") {
+                    pdf.text("X", 107.4, 139);
+                }
+                else if (nitril_grobe === "2") {
+                    pdf.text("X", 101.4, 139);
+                }
+                else if (nitril_grobe === "1") {
+                    pdf.text("X", 94.8, 139);
+                }
+
+                if (fingerline_grobe === "4") {
+                    pdf.text("X", 114.4, 143);
+                } else if (fingerline_grobe === "3") {
+                    pdf.text("X", 107.4, 143);
+                }
+                else if (fingerline_grobe === "2") {
+                    pdf.text("X", 101.4, 143);
+                }
+                else if (fingerline_grobe === "1") {
+                    pdf.text("X", 94.8, 143);
+                }
+
+
+                //3. kısım
+                if (selected === "Individuell Box") {
+                    pdf.text("X", 120, 105.5);//2-indivi
+                    //ürünler
+                    var Bettschutzunterlagen = localStorage.getItem("Bettschutzunterlagen");
+                    var Besucherschürzen = localStorage.getItem("Besucherschürzen");
+                    var Fingerlinge = localStorage.getItem("Fingerlinge");
+                    var Nitril_Handschuhe = localStorage.getItem("Nitril Handschuhe");
+                    var Mundschutz = localStorage.getItem("Mundschutz");
+                    var Flächendesinfektion = localStorage.getItem("Flächendesinfektion");
+                    var Handesinfektionsgel = localStorage.getItem("Handesinfektionsgel");
+                    var gratis = localStorage.getItem("gratis");
+
+                    if (Bettschutzunterlagen > 0) {
+                        pdf.setFontSize(8).text("x", 120.6, 108.5);
+
+                    }
+                    if (Besucherschürzen > 0) {
+                        pdf.text("x", 120.6, 111.5);
+
+                    }
+                    if (Fingerlinge > 0) {
+                        pdf.text("x", 120.6, 114.5);
+
+                    }
+                    if (Nitril_Handschuhe > 0) {
+                        pdf.text("x", 120.6, 117.2);
+
+                    }
+                    if (Mundschutz > 0) {
+                        pdf.text("x", 120.6, 120);
+
+                    }
+                    if (Flächendesinfektion > 0) {
+                        pdf.text("x", 120.6, 122.8);
+
+                    }
+                    if (Handesinfektionsgel > 0) {
+                        pdf.text("x", 120.6, 125.6);
+
+                    }
+
+
+                    //gratis
+                    if (gratis === "Inkontinenz Reinigungs-/Pflegetücher") {
+                        pdf.text("x", 120.6, 132.5);
+
+                    } else if (gratis === "Shampoo Haube") {
+                        pdf.text("x", 120.6, 135.5);
+
+                    } else if (gratis === "Feuchte Waschhandschuhe mit Schutzcreme") {
+                        pdf.text("x", 120.6, 138.3);
+
+                    }
+
+                } else if (selected === "Standard Box") {
+                    pdf.text("X", 32.2, 105.5);
+
+                } else if (selected === "Inkontinenz Box") {
+                    pdf.text("X", 59.2, 105.5);
+
+                } else if (selected === "Desinfektion Box") {
+                    pdf.text("X", 88, 105.5);
+
+                }
+
+
+
+                //4. kısım
+
+                //lifeadress
+                if (lieferadresse_3 === "1") {
+                    pdf.text("x", 33, 153.5);
+
+                } else if (lieferadresse_3 === "2") {
+                    pdf.text("x", 88, 153.5);
+
+                } else if (lieferadresse_3 === "3") {
+                    pdf.text("x", 111, 153.5);
+
+                }
+
+                //5. kısım
+                //pflegedienst
+                pdf.setFontSize(10).text(name_3, 85, 177);
+                pdf.text(street_3, 60, 185);
+                pdf.text(plz_city_3, 131, 185);
+                pdf.text(phone_3, 60, 192);
+                pdf.text(email_3, 131, 192);
+
+
+                //imza
+
+                // dates
+                pdf.text(date, 40, 203);
+                pdf.text(date, 40, 252);
+
+
+                //6.kısım rexhnung
+                if (secenek_4 === "1") {
+                    pdf.setFontSize(8).text("x", 33.5, 218.5);
+
+                } else if (secenek_4 === "2") {
+                    pdf.text("x", 98.5, 218.5);
+
+                }
+                if (onay_4 === "1") {
+                    pdf.setFontSize(10).text("x", 33.5, 224.5);
+
+                } if (onay_5 === "1") {
+                    pdf.text("x", 33.5, 229);
+
+                }
+
+
+                // Resim 2'nin yüklenmesi
+                var img2Element = new Image();
+                img2Element.onload = function () {
+                    var img2Width = fixedWidth;
+                    var img2Height = this.height * fixedWidth / this.width;
+                    var marginLeft2 = (pdf.internal.pageSize.getWidth() - img2Width) / 2;
+                    var marginTop2 = 10;
+
+                    // Resim 2'yi tam sığdıracak şekilde ekle
+                    pdf.addPage();
+                    pdf.addImage(img2, 'JPEG', marginLeft2, marginTop2, img2Width, img2Height);
+                    // Metni ekleme
+                    pdf.setFontSize(8);
+                    //lifeadress
+                    if (gender_4 === "F") {
+                        pdf.text("x", 33.5, 30.5);
+
+                    } else if (gender_4 === "H") {
+                        pdf.text("x", 33.5, 33.5);
+
+                    }
+
+                    pdf.setFontSize(10).text(name_4, 60, 33.5);
+                    pdf.text(prename_4, 131, 33.5);
+                    pdf.text(street_4, 60, 40);
+                    pdf.text(plz_city_4, 131, 40);
+                    pdf.text(birthday_4, 60, 47);
+                    pdf.text(pflegekasse_4, 60, 53.5);
+                    pdf.text(versicherten_4, 131, 53.5);
+
+                    if (product_5_1 === "F") {
+                        pdf.setFontSize(8).text("X", 42, 81.7);
+
+                    }
+                    if (product_5_2 === "F") {
+                        pdf.text("X", 42, 89);
+
+                    }
+                    if (product_5_3 === "F") {
+                        pdf.text("X", 42, 96.3);
+
+                    }
+                    if (product_5_4 === "F") {
+                        pdf.text("X", 42, 103.6);
+
+                    }
+                    if (product_5_5 === "F") {
+                        pdf.text("X", 42, 110.9);
+
+                    }
+                    if (product_5_6 === "F") {
+                        pdf.text("X", 42, 118.2);
+
+                    }
+                    if (product_5_7 === "F") {
+                        pdf.text("X", 42, 125.5);
+
+                    }
+                    if (product_5_8 === "F") {
+                        pdf.text("X", 42, 132.8);
+
+                    }
+
+
+                    // eklenecek
+                    if (wechselerklarung === "1") {
+                        pdf.text("X", 29.2, 151);
+                    }
+
+                    pdf.setFontSize(10).text(date, 40, 214);
+
+
+                    // PDF'i indir
+                    pdf.save('pflegebox.pdf');
+                    // Örnek: PDF'i Blob olarak al ve FormData ile gönder
+                    // PDF'i Blob olarak elde et
+                    var blob = pdf.output('blob');
+
+                    // FormData nesnesi oluştur
+                    var formData = new FormData();
+                    // Blob'u ve dosya adını FormData'ya ekle
+                    formData.append('pdf', blob, 'pflegebox.pdf');
+
+                    // FormData'yı 'upload.php' adresine POST isteği ile gönder
+                    fetch('upload.php', {
+                        method: 'POST',
+                        body: formData,
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            // İşlem başarılı olduğunda sunucudan dönen yanıtı logla
+                            console.log(data);
+                        })
+                        .catch(error => {
+                            // Hata durumunda hata mesajını logla
+                            console.error('Error:', error);
+                        });
+                };
+                img2Element.src = img2; // Resim 2'nin yüklenmesi
+            };
+            img1Element.src = img1; // Resim 1'in yüklenmesi
+
+
+
+
+        }
+
+        function generatePDF() {
+            console.log(name_1);
+
+            const { jsPDF } = window.jspdf;
+
+            // PDF nesnesini oluştur
+            var pdf = new jsPDF();
+
+            // Resim 1'in yolu
+            var img1 = '/0001.jpg';
+            // Resim 2'nin yolu
+            var img2 = '0001.1.jpg';
+            var fixedWidth = 180;
+
+            // Resim 1'i yükleyip ölçülerini al
+            var img1Element = new Image();
+            img1Element.onload = function () {
+
+                var imgHeight = this.height * fixedWidth / this.width;
+                var imgWidth = fixedWidth;
+                var marginLeft = (pdf.internal.pageSize.getWidth() - imgWidth) / 2;
+                var marginTop = 10;
+                // Resim 1'i tam sığdıracak şekilde ekle
+                pdf.addImage(img1, 'JPEG', marginLeft, marginTop, imgWidth, imgHeight);
+
+
+                pdf.setFontSize(10);
+                // Belirli koşullara göre metin ekleyin
+                if (gender_1 === "H") {
+                    pdf.text("x", 33.5, 44.5);//1-gender
+
+                } else if (gender_1 === "F") {
+                    pdf.text("x", 33.5, 41.5);//1-gender
+                }
+
+                pdf.text(name_1, 60, 43);
+                pdf.text(prename_1, 131, 43);
+                pdf.text(street_1, 60, 51);
+                pdf.text(plz_city_1, 131, 51);
+                pdf.text(phone_1, 60, 57);
+                pdf.text(email_1, 131.2, 57);
+                //pfleggeggard
+                if (pflegegrad_1 === "1") {
+                    pdf.text("x", 76.3, 63.5);
+                } else if (pflegegrad_1 === "2") {
+
+                    pdf.text("x", 84.5, 63.5);
+                } else if (pflegegrad_1 === "3") {
+
+                    pdf.text("x", 92.6, 63.5);
+                } else if (pflegegrad_1 === "4") {
+
+                    pdf.text("x", 100.5, 63.5);
+                } else if (pflegegrad_1 === "5") {
+
+                    pdf.text("x", 110, 63.5);
+                }
+                else if (pflegegrad_1 === "Ich habe keinen Pflegegrad") {
+
+                    pdf.text("x", 117.6, 63.5);
+                }
+
+                //versicherte
+                if (versicherte_1 === "gesetzlichpflegeversichert") {
+                    pdf.text("x", 54, 68.5);
+
+                } else if (versicherte_1 === "privatpflegeversichert") {
+                    pdf.text("x", 87, 68.5);
+
+                } else if (versicherte_1 === "beihilfeberechtigt") {
+                    pdf.text("x", 115, 68.5);
+
+                } else if (versicherte_1 === "überOrtsamt/Sozialamtversichert") {
+                    pdf.text("x", 138, 68.5);
+
+                }
+
+
+
+                //2 kısım
+                // Belirli koşullara göre metin ekleyin
+                if (gender_2 === "H") {
+                    pdf.setFontSize(7).text("x", 33.2, 79.2);
+
+                } else if (gender_2 === "F") {
+                    pdf.text("x", 33.2, 82.5);
+                }
+
+
+
+
+                pdf.setFontSize(10).text(name_2, 60, 82);
+                pdf.text(prename_2, 131, 82);
+
+                pdf.text(street_2, 60, 88);
+                pdf.text(plz_city_2, 131, 88);
+
+                pdf.text(phone_2, 60, 95.2);
+                pdf.text(email_2, 131, 95.2);
+
+
+                if (nitril_grobe === "4") {
+                    pdf.text("X", 114.4, 139);
+                } else if (nitril_grobe === "3") {
+                    pdf.text("X", 107.4, 139);
+                }
+                else if (nitril_grobe === "2") {
+                    pdf.text("X", 101.4, 139);
+                }
+                else if (nitril_grobe === "1") {
+                    pdf.text("X", 94.8, 139);
+                }
+
+                if (fingerline_grobe === "4") {
+                    pdf.text("X", 114.4, 143);
+                }
+                else if (fingerline_grobe === "3") {
+                    pdf.text("X", 107.4, 143);
+                }
+                else if (fingerline_grobe === "2") {
+                    pdf.text("X", 101.4, 143);
+                }
+                else if (fingerline_grobe === "1") {
+                    pdf.text("X", 94.8, 143);
+                }
+
+
+
+                // if (pflegeperson_2 === "Ehe-/Lebenspartner") {
+                //     pdf.text("x", 51, 118);//2-ehe
+
+                // }
+                // else if (pflegeperson_2 === "(Schwieger-)Tochter/Sohn") {
+                //     pdf.text("x", 79, 118);//2-sch
+
+                // } else if (pflegeperson_2 === "Mutter/Vater") {
+                //     pdf.text("x", 114, 118);//2-mutter
+
+                // } else if (pflegeperson_2 === "Freund(in)/Bekannte(r)") {
+                //     pdf.text("x", 133, 118);//2-freu
+
+                // } else if (pflegeperson_2 === "Betreuer(in)") {
+                //     pdf.text("x", 164, 118);//2-betreu
+                // }
+
+
+                // if (bevollmachtigt_2 === "1") {
+                //     pdf.text("x", 87, 122);//2-ja
+
+                // } else if (bevollmachtigt_2 === "2") {
+                //     pdf.text("x", 96, 122);//2-nein
+
+                // }
+
+                //3. kısım
+                if (selected === "Individuell Box") {
+                    pdf.text("X", 120, 105.5);//2-indivi
+                    //ürünler
+                    var Bettschutzunterlagen = localStorage.getItem("Bettschutzunterlagen");
+                    var Besucherschürzen = localStorage.getItem("Besucherschürzen");
+                    var Fingerlinge = localStorage.getItem("Fingerlinge");
+                    var Nitril_Handschuhe = localStorage.getItem("Nitril Handschuhe");
+                    var Mundschutz = localStorage.getItem("Mundschutz");
+                    var Flächendesinfektion = localStorage.getItem("Flächendesinfektion");
+                    var Handesinfektionsgel = localStorage.getItem("Handesinfektionsgel");
+                    var gratis = localStorage.getItem("gratis");
+
+                    if (Bettschutzunterlagen > 0) {
+                        pdf.setFontSize(8).text("x", 120.6, 108.5);
+
+                    }
+                    if (Besucherschürzen > 0) {
+                        pdf.text("x", 120.6, 111.5);
+
+                    }
+                    if (Fingerlinge > 0) {
+                        pdf.text("x", 120.6, 114.5);
+
+                    }
+                    if (Nitril_Handschuhe > 0) {
+                        pdf.text("x", 120.6, 117.2);
+
+                    }
+                    if (Mundschutz > 0) {
+                        pdf.text("x", 120.6, 120);
+
+                    }
+                    if (Flächendesinfektion > 0) {
+                        pdf.text("x", 120.6, 122.8);
+
+                    }
+                    if (Handesinfektionsgel > 0) {
+                        pdf.text("x", 120.6, 125.6);
+
+                    }
+
+
+                    //gratis
+                    if (gratis === "Inkontinenz Reinigungs-/Pflegetücher") {
+                        pdf.text("x", 120.6, 132.5);
+
+                    } else if (gratis === "Shampoo Haube") {
+                        pdf.text("x", 120.6, 135.5);
+
+                    } else if (gratis === "Feuchte Waschhandschuhe mit Schutzcreme") {
+                        pdf.text("x", 120.6, 138.3);
+
+                    }
+
+                } else if (selected === "Standard Box") {
+                    pdf.text("X", 32.2, 105.5);
+                } else if (selected === "Inkontinenz Box") {
+                    pdf.text("X", 59.2, 105.5);
+
+                } else if (selected === "Desinfektion Box") {
+                    pdf.text("X", 88, 105.5);
+
+                }
+
+
+
+
+
+
+                //4. kısım
+
+                //lifeadress
+                if (lieferadresse_3 === "1") {
+                    pdf.text("x", 33, 153.5);
+
+                } else if (lieferadresse_3 === "2") {
+                    pdf.text("x", 88, 153.5);
+
+                } else if (lieferadresse_3 === "3") {
+                    pdf.text("x", 111, 153.5);
+
+                }
+
+                //5. kısım
+                //pflegedienst
+                pdf.setFontSize(10).text(name_3, 85, 177);
+                pdf.text(street_3, 60, 185);
+                pdf.text(plz_city_3, 131, 185);
+                pdf.text(phone_3, 60, 192);
+                pdf.text(email_3, 131, 192);
+
+
+                //imza
+                const signatureImage = localStorage.getItem("signatureImage")
+                pdf.addImage(signatureImage, "PNG", 131, 242, 25, 12);
+
+                if (name_3 != "" || street_3 != "" || plz_city_3 != "" || phone_3 != "" || email_3 != "") {
+                    pdf.addImage(signatureImage, "PNG", 131, 194, 25, 12);
+                }
+
+                // dates
+                pdf.text(date, 40, 203);
+                pdf.text(date, 40, 252);
+
+
+                //6.kısım rexhnung
+                if (secenek_4 === "1") {
+                    pdf.setFontSize(8).text("x", 33.5, 218.5);
+
+                } else if (secenek_4 === "2") {
+                    pdf.text("x", 98.5, 218.5);
+
+                }
+                if (onay_4 === "1") {
+                    pdf.setFontSize(10).text("x", 33.5, 224.5);
+
+                } if (onay_5 === "1") {
+                    pdf.text("x", 33.5, 229);
+
+                }
+
+
+                // Resim 2'nin yüklenmesi
+                var img2Element = new Image();
+                img2Element.onload = function () {
+                    var img2Width = fixedWidth;
+                    var img2Height = this.height * fixedWidth / this.width;
+                    var marginLeft2 = (pdf.internal.pageSize.getWidth() - img2Width) / 2;
+                    var marginTop2 = 10;
+
+                    // Resim 2'yi tam sığdıracak şekilde ekle
+                    pdf.addPage();
+                    pdf.addImage(img2, 'JPEG', marginLeft2, marginTop2, img2Width, img2Height);
+                    // Metni ekleme
+                    pdf.setFontSize(8);
+                    //lifeadress
+                    if (gender_4 === "F") {
+                        pdf.text("x", 33.5, 30.5);
+
+                    } else if (gender_4 === "H") {
+                        pdf.text("x", 33.5, 33.5);
+
+                    }
+
+                    pdf.setFontSize(10).text(name_4, 60, 33.5);
+                    pdf.text(prename_4, 131, 33.5);
+                    pdf.text(street_4, 60, 40);
+                    pdf.text(plz_city_4, 131, 40);
+                    pdf.text(birthday_4, 60, 47);
+                    pdf.text(pflegekasse_4, 60, 53.5);
+                    pdf.text(versicherten_4, 131, 53.5);
+
+                    if (product_5_1 === "F") {
+                        pdf.setFontSize(8).text("X", 42, 81.7);
+
+                    }
+                    if (product_5_2 === "F") {
+                        pdf.text("X", 42, 89);
+
+                    }
+                    if (product_5_3 === "F") {
+                        pdf.text("X", 42, 96.3);
+
+                    }
+                    if (product_5_4 === "F") {
+                        pdf.text("X", 42, 103.6);
+
+                    }
+                    if (product_5_5 === "F") {
+                        pdf.text("X", 42, 110.9);
+
+                    }
+                    if (product_5_6 === "F") {
+                        pdf.text("X", 42, 118.2);
+
+                    }
+                    if (product_5_7 === "F") {
+                        pdf.text("X", 42, 125.5);
+
+                    }
+                    if (product_5_8 === "F") {
+                        pdf.text("X", 42, 132.8);
+
+                    }
+
+
+                    // eklenecek
+                    if (wechselerklarung === "1") {
+                        pdf.text("X", 29.2, 151);
+                    }
+
+                    pdf.addImage(signatureImage, "PNG", 131, 202, 25, 12);
+                    pdf.setFontSize(10).text(date, 40, 214);
+
+
+                    // PDF'i indir
+                    pdf.save('pflegebox.pdf');
+                    // Örnek: PDF'i Blob olarak al ve FormData ile gönder
+                    // PDF'i Blob olarak elde et
+                    var blob = pdf.output('blob');
+
+                    // FormData nesnesi oluştur
+                    var formData = new FormData();
+                    // Blob'u ve dosya adını FormData'ya ekle
+                    formData.append('pdf', blob, 'pflegebox.pdf');
+
+                    // FormData'yı 'upload.php' adresine POST isteği ile gönder
+                    fetch('upload.php', {
+                        method: 'POST',
+                        body: formData,
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            // İşlem başarılı olduğunda sunucudan dönen yanıtı logla
+                            console.log(data);
+                        })
+                        .catch(error => {
+                            // Hata durumunda hata mesajını logla
+                            console.error('Error:', error);
+                        });
+                };
+                img2Element.src = img2; // Resim 2'nin yüklenmesi
+            };
+            img1Element.src = img1; // Resim 1'in yüklenmesi
+
+
+
+
+        }
+
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+</body>
+
+</html>

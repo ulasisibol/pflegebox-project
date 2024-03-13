@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Scripts -->
+    <script src="/js/app.js" defer></script>
+    <!-- Styles -->
+    <link href="/css/app.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+
+
+</head>
+
+<body>
+
+    <div class="header py-5">
+        <!--<img class="logo" src="https://formular.curama.de/assets/img/logo_curama.png" />-->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-7">
+                    <div class="menu-bars">
+                        <div class="bar-content ">
+                            <p>1. Box auswählen</p>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="bar-content  active ">
+                            <p>2. Persönliche Daten</p>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="bar-content ">
+                            <p>3. Unterschrift</p>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="insurance-number">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <span>X</span>
+                    <h1>Ihre Versichertennummer</h1>
+                    <p class="my-5">Bitte tragen Sie die Versichertennummer inkl. dem Buchstaben in das dafür
+                        vorgesehene Feld ein.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container pb-5">
+        <div class="row mb-5">
+            <div class="col-md-12">
+
+
+            </div>
+        </div>
+        <div class="row justify-content-md-center data-form">
+            <div id="error-message" class="row mb-3" style="display: none;">
+                <div class="col-md-12">
+                    <p class="text-center"
+                        style="padding: 10px; border-radius: 10px; color: white; background-color: rgba(203, 28, 28, 0.866);">
+                        Bitte
+                        überprüfen Sie Ihre Eingabe,
+                        leider haben Sie noch
+                        nicht alle Pflichtfelder ausgefüllt. Herzlichen Dank, Ihr Team von Pflegedienstbox.</p>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <form>
+                    <div class="form-group">
+                        <h2 class="text-center" style="font-size: x-large;">Rechnungsempfänger <span
+                                style="font-size: large;">(Optionale Angaben)</span></h2>
+                        <br>
+                        <p>Nur bei privat Versicherten und/oder Beihilfeberechtigten:
+                        </p>
+                        <input name="secenek-4" type="radio" value="1"> <span
+                            class="mx-2">Versicherte(r)/Pflegebedürftige(r)</span><br>
+                        <input name="secenek-4" type="radio" value="2"> <span
+                            class="mx-2">Angehörige(r)/Pflegeperson</span> <br>
+                        <br>
+                    </div>
+                    <div class="form-group">
+                        <h2 class="text-center" style="font-size: x-large;">Bestätigung <span
+                                style="font-size: large;">(Pflichtangaben)</span></h2>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input id="f" name="onay-4" type="radio" value="1"> <span class="mx-2">Ich habe die
+                                    AGB (<a href="https://pflegedienstbox.de/agb/">www.pflegedienstbox.de/agb</a>) zur
+                                    Kenntnis genommen.</span><br>
+                                <input id="m" name="onay-5" type="radio" value="1"> <span class="mx-2">Ich bin damit
+                                    einverstanden, dass die Hausmann Care GmbH, Klosterstr. 58 45481 Mülheim an der
+                                    Ruhr, die von mir zuvor gemachten Angaben
+                                    verarbeitet, um mich über Pflege- & Gesundheitsthemen zu informieren. Meine
+                                    Einwilligung bezieht sich ausdrücklich auch auf die Verarbeitung
+                                    von Gesundheitsdaten als besondere Kategorie personenbezogener Daten. Ich kann meine
+                                    Einwilligung jederzeit mit Wirkung für die Zukunft
+                                    per E-Mail an datenschutz@hausmann-care.com.com oder per Post an Hausmann Care GmbH,
+                                    Klosterstr. 58, 45481 Mülheim an der Ruhr
+                                    widerrufen.Informationen zur Verarbeitung Ihrer personenbezogenen Daten durch die
+                                    Hausmann Care GmbH können Sie den
+                                    beigefügten Datenschutzhinweisen entnehmen, welche auch unter
+                                    www.pflegedienstbox.de/datenschutz abrufbar sind.</span> <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <a href="form-page-3.html" class="submit-button float-left mr-3 back-button back">Zurück</a>
+                        <button class="submit-button float-left" type="submit">Weiter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        document.querySelectorAll('input[type="radio"]').forEach(function (radio) {
+            // İlk tıklama sırasında radio butonunun mevcut durumunu saklamak için bir özellik ekleyin
+            radio.addEventListener('mousedown', function () {
+                this.dataset.wasChecked = this.checked;
+            });
+
+            radio.addEventListener('click', function () {
+                // Eğer radio butonu zaten seçiliyse, seçimini kaldır ve LocalStorage kaydını sil
+                if (this.dataset.wasChecked === 'true') {
+                    this.checked = false;
+                    localStorage.removeItem(this.name);
+                } else {
+                    // Eğer radio butonu daha önce seçili değilse, normal davranışı izle ve LocalStorage'a kaydet
+                    localStorage.setItem(this.name, this.value);
+                }
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            // Form gönderme olayını dinle
+            document.querySelector('form').addEventListener('submit', function (event) {
+                event.preventDefault(); // Formun normal submit işlemini engelle
+
+                // ID'si 'f' ve 'm' olan radio butonlarının kontrolü
+                var fChecked = document.getElementById('f').checked;
+                var mChecked = document.getElementById('m').checked;
+
+                if (fChecked && mChecked) {
+                    window.location.href = 'form-page-5.html';
+
+                    // Eğer 'f' ve 'm' seçili değilse, hata mesajını göster
+                } else {
+                    document.getElementById('error-message').style.display = 'block';
+
+                    // Eğer herhangi biri seçiliyse, diğer sayfaya yönlendir
+                }
+            });
+        });
+
+        // Form elemanlarını seçme
+        const form = document.querySelector('form');
+        const inputs = form.querySelectorAll('input');
+        const selects = form.querySelectorAll('select');
+
+        // Form gönderildiğinde çalışacak fonksiyon
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Sayfanın yeniden yüklenmesini engelle
+
+            // Form elemanlarını local storage'a kaydetme
+            inputs.forEach(input => {
+                if (input.type !== 'radio' || input.checked) {
+                    localStorage.setItem(input.name, input.value);
+                }
+            });
+            selects.forEach(select => {
+                localStorage.setItem(select.name, select.value);
+            });
+
+            // Opsiyonel olarak local storage'ı temizleme (test amacıyla)
+            // localStorage.clear();
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // localStorage'dan belirli anahtarları temizleme
+            function clearLocalStorage() {
+                localStorage.removeItem('onay-4');
+                localStorage.removeItem('onay-5');
+            }
+
+            // Sayfa yeniden yüklendiğinde localStorage'dan belirli anahtarları temizle
+            clearLocalStorage();
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('form');
+
+            // localStorage'dan form verilerini alıp form alanlarına yerleştirme
+            function loadFormDataFromLocalStorage() {
+                const inputs = form.querySelectorAll('input');
+                const selects = form.querySelectorAll('select');
+
+                // Input alanlarına localStorage'dan değerleri yerleştirme
+                inputs.forEach(input => {
+                    const savedValue = localStorage.getItem(input.name);
+                    if (savedValue !== null) {
+                        if (input.type === 'checkbox' || input.type === 'radio') {
+                            input.checked = savedValue === input.value;
+                        } else {
+                            input.value = savedValue;
+                        }
+                    }
+                });
+
+                // Select alanlarına localStorage'dan değerleri yerleştirme
+                selects.forEach(select => {
+                    const savedValue = localStorage.getItem(select.name);
+                    if (savedValue !== null) {
+                        select.value = savedValue;
+                    }
+                });
+            }
+
+            // Sayfa yüklendiğinde localStorage'dan form verilerini yükleme
+            loadFormDataFromLocalStorage();
+
+            // Form gönderildiğinde form verilerini localStorage'a kaydetme
+            form.addEventListener('submit', function (event) {
+                const formData = new FormData(form);
+                formData.forEach((value, key) => {
+                    localStorage.setItem(key, value);
+                });
+            });
+        });
+
+    </script>
+</body>
+
+</html>

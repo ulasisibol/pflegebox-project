@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Scripts -->
+    <script src="/js/app.js" defer></script>
+    <!-- Styles -->
+    <link href="/css/app.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+
+
+</head>
+
+<body>
+
+    <div class="header py-5">
+        <!--<img class="logo" src="https://formular.curama.de/assets/img/logo_curama.png" />-->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-7">
+                    <div class="menu-bars">
+                        <div class="bar-content ">
+                            <p>1. Box auswählen</p>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="bar-content  active ">
+                            <p>2. Persönliche Daten</p>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="bar-content ">
+                            <p>3. Unterschrift</p>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="insurance-number">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <span>X</span>
+                    <h1>Ihre Versichertennummer</h1>
+                    <p class="my-5">Bitte tragen Sie die Versichertennummer inkl. dem Buchstaben in das dafür
+                        vorgesehene Feld ein.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container pb-5">
+        <div class="row mb-5">
+            <div class="col-md-12">
+
+
+            </div>
+        </div>
+        <div class="row justify-content-md-center data-form">
+            <div class="col-md-10">
+                <div id="error-message" class="row mb-3" style="display: none;">
+                    <div class="col-md-12">
+                        <p class="text-center"
+                            style="padding: 10px; border-radius: 10px; color: white; background-color: rgba(203, 28, 28, 0.866);">
+                            Bitte
+                            überprüfen Sie Ihre Eingabe,
+                            leider haben Sie noch
+                            nicht alle Pflichtfelder ausgefüllt. Herzlichen Dank, Ihr Team von Pflegedienstbox.</p>
+                    </div>
+                </div>
+                <form id="myForm">
+                    <div class="form-group">
+                        <h2 class="text-center" style="font-size: x-large;">Ich beantrage die Kostenübernahme für</h2>
+                        <p class="text-center">(zum Verbrauch bestimmte Pflegehilfsmittel (PG 54) bis maximal 40 €
+                            monatlich/bei Beihilfeanspruch
+                            maximal 20 € monatlich. Darüber hinausgehende Kosten werden von mir selbst getragen.)
+                        </p>
+                        <br>
+                        <input id="product-5.1" name="product-5.1" type="radio" value="F"> <span
+                            class="mx-2"><b>Saugende
+                                Bettschutzeinlagen</b> (mind. 60 x 90 cm (Einmalgebrauch))</span><br>
+                        <input id="product-5.2" name="product-5.2" type="radio" value="F"> <span
+                            class="mx-2"><b>Fingerlinge</b>
+                            (puderfrei)</span><br>
+                        <input id="product-5.3" name="product-5.3" type="radio" value="F"> <span
+                            class="mx-2"><b>Einmalhandschuhe</b> (puderfrei)</span><br>
+                        <input id="product-5.4" name="product-5.4" type="radio" value="F"> <span
+                            class="mx-2"><b>Mundschutz</b>
+                            (Vlies, 3-lagig (Einmalgebrauch))</span><br>
+                        <input id="product-5.5" name="product-5.5" type="radio" value="F"> <span
+                            class="mx-2"><b>Schutzschürzen</b> ( wasserfestes/-abweisendes Folienmaterial
+                            (Einmalgebrauch))</span><br>
+                        <input id="product-5.6" name="product-5.6" type="radio" value="F"> <span
+                            class="mx-2"><b>Schutzschürzen</b> ( wasserfestes/-abweisendes Folienmaterial
+                            (wiederverwendbar))</span><br>
+                        <input id="product-5.7" name="product-5.7" type="radio" value="F"> <span
+                            class="mx-2"><b>Händedesinfektionsmittel</b> (keimvermindernde Wirkung (Bakterien, Pilze,
+                            Viren))</span><br>
+                        <input id="product-5.8" name="product-5.8" type="radio" value="F"> <span
+                            class="mx-2"><b>Flächendesinfektionsmittel</b> (keimvermindernde Wirkung (Bakterien, Pilze,
+                            Viren))</span><br>
+
+
+
+
+                        <br>
+                    </div>
+                    <div class="form-group">
+                        <h2 style="font-size: x-large;">Wechselerklärung bisheriger Leistungserbringer <span
+                                style="font-size: large;">(Optionale Angaben)</span></h2>
+                        <h6>Falls Sie bereits zum Verbrauch bestimmte Pflegehilfsmittel eines anderen
+                            Leistungserbringers erhalten:</h6>
+                        <div>
+                            <input id="wechselerklarung" name="wechselerklarung" type="radio" value="1"> <span
+                                class="mx-2">Ja,
+                                hiermit kündige ich den Bezugen Bezug der Pflegehilfsmittel zum Verbrauch bei meinem
+                                bisherigen
+                                Leistungsanbieter zum nächstmöglichen Datum. Fortan möchte ich die Pflegehilfsmittel des
+                                Leistungserbringers
+                                Hausmann Care GmbH, Kloster. 58, 45481 Mülheim an der Ruhr, erhalten.</span><br>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <a href="form-page-5.html" class="submit-button float-left mr-3 back-button back">Zurück</a>
+                        <button class="submit-button float-left" type="button"
+                            onclick="window.location.href='form-page-final.html'">Weiter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // ID'sinde 'product' kelimesi geçen tüm radio butonlarını bul
+            document.querySelectorAll('input[type="radio"]').forEach(function (radio) {
+                if (radio.id.includes('product')) {
+                    radio.checked = true; // Eğer ID'sinde 'product' kelimesi geçiyorsa, radio butonunu seçili hale getir
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Sayfa yüklendiğinde mevcut seçili radio butonlarını tarayıp LocalStorage'a kaydet
+            scanAndSaveSelectedRadios();
+
+            // Radio butonlarının durum değişikliğini dinleyerek, değişiklik olduğunda LocalStorage'a kaydet
+            document.querySelectorAll('input[type="radio"]').forEach(function (radio) {
+                radio.addEventListener('change', function () {
+                    // Eğer radio butonu seçiliyse, LocalStorage'a kaydet
+                    if (this.checked) {
+                        localStorage.setItem(this.id, this.value);
+                    } else {
+                        // Teorik olarak, bir radio butonunun seçimi başka bir buton seçildiğinde kaldırılır
+                        // Ancak, bu durumda mevcut seçili olanı tekrar tarayıp kaydetmek daha mantıklı olabilir
+                        scanAndSaveSelectedRadios();
+                    }
+                });
+            });
+        });
+
+        function scanAndSaveSelectedRadios() {
+            // Tüm radio butonlarını tarayıp, seçili olanların LocalStorage'a kaydını yap
+            document.querySelectorAll('input[type="radio"]:checked').forEach(function (radio) {
+                localStorage.setItem(radio.id, radio.value);
+            });
+        }
+
+        document.querySelectorAll('input[type="radio"]').forEach(function (radio) {
+            // İlk tıklama sırasında radio butonunun mevcut durumunu saklamak için bir özellik ekleyin
+            radio.addEventListener('mousedown', function () {
+                this.dataset.wasChecked = this.checked;
+            });
+
+            radio.addEventListener('click', function () {
+                // Eğer radio butonu zaten seçiliyse, seçimini kaldır ve LocalStorage kaydını sil
+                if (this.dataset.wasChecked === 'true') {
+                    this.checked = false;
+                    localStorage.removeItem(this.id);
+                } else {
+                    // Eğer radio butonu daha önce seçili değilse, normal davranışı izle ve LocalStorage'a kaydet
+                    localStorage.setItem(this.id, this.value);
+                }
+            });
+        });
+        document.querySelector('form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Formun normal submit işlemini engelle
+
+            // Sadece seçili olan radio düğmelerinin değerlerini kaydet
+            var checkedRadios = document.querySelectorAll('input[type="radio"]:checked');
+            checkedRadios.forEach(function (radio) {
+                localStorage.setItem(radio.name, radio.value);
+            });
+
+            // Opsiyonel olarak local storage'ı temizleme (test amacıyla)
+            // localStorage.clear();
+        });
+
+        document.querySelector('form').addEventListener('submit', function (event) {
+            // Form gönderilmeden önce boş alan kontrolü yapılıyor
+            var f1 = document.querySelectorAll('input[name="product-5.1"]:checked');
+            var f2 = document.querySelectorAll('input[name="product-5.2"]:checked');
+            var f3 = document.querySelectorAll('input[name="product-5.3"]:checked');
+            var f4 = document.querySelectorAll('input[name="product-5.4"]:checked');
+            var f5 = document.querySelectorAll('input[name="product-5.5"]:checked');
+            var f6 = document.querySelectorAll('input[name="product-5.6"]:checked');
+            var f7 = document.querySelectorAll('input[name="product-5.7"]:checked');
+            var f8 = document.querySelectorAll('input[name="product-5.8"]:checked');
+            if (f1 || f2 || f3 || f4 || f5 || f6 || f7 || f8) {
+                window.location.href = 'page-3.html';
+            } else {
+                event.preventDefault();
+                document.getElementById('error-message').style.display = 'block';
+            }
+        });
+
+        function clearSelection() {
+            var radios = document.querySelectorAll('input[type="radio"]');
+
+            radios.forEach(function (radio) {
+                if (radio.checked) {
+                    radio.checked = false;
+                    localStorage.removeItem(radio.id);
+                }
+            });
+        }
+
+        document.querySelectorAll('input[type="radio"]').forEach(function (radio) {
+            radio.addEventListener('click', function () {
+                if (this.checked) {
+                    localStorage.setItem(this.id, this.value);
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('input[type="radio"]').forEach(function (radio) {
+                var value = localStorage.getItem(radio.id);
+                if (value === radio.value) {
+                    radio.checked = true;
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
