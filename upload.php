@@ -13,13 +13,13 @@ if(isset($_FILES['pdf']['name'])){
         //Mail Bağlantı Ayarları 
         //Mail Hangi Hesaptan Gönderilecek ise onun bilgilerini yazın.
         $MailSmtpHost = "smtp.gmail.com";
-        $MailUserName = "cerenulas8@gmail.com";
-        $MailPassword = "efeflbwheybyrfar";
+        $MailUserName = "your-mail";
+        $MailPassword = "your-passs";
         //Mail Bağlantı Ayarları Tamamlandı
 
         //Doldurulan Form Mail Olarak Kime Gidecek?
-        $MailKimeGidecek1 = "kalkan_pepe@hotmail.com.tr";
-        $MailKimeGidecek3 = "antrag@pflegedienstbox.de";
+        $MailKimeGidecek1 = "*******e@hotmail.com.tr";
+        $MailKimeGidecek3 = "**g@pflegedi**x.de";
 
         //Doldurulan Form Mail Olarak Kime Gidecek Tamamlandı
 
